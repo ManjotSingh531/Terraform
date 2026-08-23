@@ -5,6 +5,7 @@ resource "aws_key_pair" "flolki_key" {
 resource "aws_instance" "myfirstinstance" {
     ami = lookup(var.AMI, var.AWS_REGION)
     instance_type = "t3.micro"
+    key_name = aws_key_pair.flolki_key.key_name
 
     tags = {
         Name = "Gibs"
