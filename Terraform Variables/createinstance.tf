@@ -5,5 +5,5 @@ resource "aws_instance" "myfirstinstance" {
     tags = {
         Name = "Gibs"
     }
-    security_groups = "var.SecurityGroup"
+    security_groups = var.SecurityGroup
 }
