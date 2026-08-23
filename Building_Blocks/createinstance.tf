@@ -10,7 +10,7 @@ resource "aws_instance" "myfirstinstance" {
         Name = "Gibs"
     }
 
-    security_groups = var.SecurityGroup
+    vpc_security_group_ids = var.SecurityGroup
 
     provisioner "file" {
         source = "${path.module}/installNginx.sh"
