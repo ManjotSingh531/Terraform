@@ -28,6 +28,6 @@ resource "aws_instance" "myfirstinstance" {
     tags = {
         Name = "Gibs"
     }
-
+    
     vpc_security_group_ids = var.SecurityGroup
 }

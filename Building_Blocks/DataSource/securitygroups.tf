@@ -1,32 +1,18 @@
 data "aws_ip_ranges" "selected_ip_ranges" {
-    regions = ["ap-northeast-1", "ap-southeast-1"]
+    regions = ["ap-southeast-2","ap-south-1"]
     services = ["EC2"]
 }
 
 resource "aws_security_group" "web" {
     name = "terraform-web-sg"
-    description = "Custom security group for web traffic"
+    description = "Allow inbound traffic on port 443 from selected IP ranges"
 
     ingress {
-        description = "Allow HTTP traffic from selected IP ranges"
+        description = "Allow inbound traffic on port 443 from selected IP ranges"
         from_port = 443
         to_port = 443
         protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-    ingress {
-        description = "Allow HTTPS traffic from selected IP ranges"
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-    ingress {
-        description = "Allow SSH traffic from selected IP ranges"
-        from_port = 22
-        to_port = 22
-        protocol = "tcp"
-        cidr_blocks = ["13.201.77.92/32"]
+        cidr_blocks = slice(data.aws_ip_ranges.selected_ip_ranges.cidr_blocks, 0, 50)
     }
 
     tags = {
