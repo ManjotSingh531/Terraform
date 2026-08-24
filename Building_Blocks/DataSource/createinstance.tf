@@ -6,7 +6,7 @@ data "aws_ami" "latest_ubuntu" {
 
     filter {
         name = "name"
-        values = ["ubuntu/images-testing/hvm-ssd-gp3/ubuntu-stonking-daily-amd64-server-*"]
+        values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
     }
 
     filter {
