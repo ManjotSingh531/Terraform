@@ -12,4 +12,9 @@ resource "aws_security_group" "custom_us_east" {
         protocol = "tcp"
         cidr_blocks = data.aws_ip_ranges.us_east_ip_ranges.cidr_blocks
     }
+
+    tags = {
+        createDate = data.aws_ip_ranges.us_east_ip_ranges.create_date
+        syncToken = data.aws_ip_ranges.us_east_ip_ranges.sync_token
+    }
 }
