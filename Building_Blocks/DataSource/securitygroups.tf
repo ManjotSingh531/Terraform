@@ -1,5 +1,5 @@
 data "aws_ip_ranges" "us_east_ip_ranges" {
-    regions = ["us-east-1", "us-east-2"]
+    regions = ["ap-northeast-1", "ap-southeast-1"]
     services = ["EC2"]
 }
 
