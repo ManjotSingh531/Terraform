@@ -1,6 +1,6 @@
 data "aws_availability_zones" "available" {}
 
-data "aws_ami" "latest_ubuntu" {
+data "aws_ami" "ubuntu" {
     most_recent = true
     owners = ["099720109477"]
 
@@ -21,7 +21,7 @@ data "aws_ami" "latest_ubuntu" {
 }
 
 resource "aws_instance" "myfirstinstance" {
-    ami = data.aws_ami.latest_ubuntu.id
+    ami = data.aws_ami.ubuntu.id
     instance_type = "t3.micro"
     availability_zone = data.aws_availability_zones.available.names[0]
 
