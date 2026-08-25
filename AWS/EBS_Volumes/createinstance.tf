@@ -17,7 +17,7 @@ resource "aws_instance" "myfirstinstance" {
 
 #EBS volume resource
 resource "aws_ebs_volume" "ebs-volume" {
-    availability_zone = aws_instance.myfirstinstance.availability_zone
+    availability_zone = "ap-south-1b"
     size              = 50
     type              = "gp3"
     tags = {
