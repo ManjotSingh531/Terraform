@@ -6,8 +6,8 @@ resource "aws_db_subnet_group" "mariadb_subnet" {
 }
 
 #RDS Parameters
-resource "aws_db_parameter_group" "mariadb_parameter" {
-    name = "mariadb_parameter"
+resource "aws_db_parameter_group" "mariadb-parameter" {
+    name = "mariadb-parameter"
     family = "mariadb11.4"
     description = "MariaDB Parameter group"
 
