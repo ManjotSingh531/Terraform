@@ -12,7 +12,7 @@ resource "aws_db_parameter_group" "mariadb-parameter" {
     description = "MariaDB Parameter group"
 
     parameter {
-      name = "aws_allow_packet"
+      name = "max_allow_packet"
       value = "16777218"
     }
 }
@@ -28,7 +28,7 @@ resource "aws_db_instance" "gibs_mariadb" {
     password             = "123456"
     parameter_group_name = aws_db_parameter_group.mariadb-parameter.name
     db_subnet_group_name = aws_db_subnet_group.mariadb_subnet.name
-    multi_az = "false"
+    multi_az = false
     vpc_security_group_ids = [aws_security_group.allow-mariadb.id]
     storage_type = "gp3"
     backup_retention_period = 30
