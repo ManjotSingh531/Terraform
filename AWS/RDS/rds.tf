@@ -26,7 +26,7 @@ resource "aws_db_instance" "gibs_mariadb" {
     instance_class       = "db.t3.micro"
     username             = "admin"
     password             = "123456"
-    parameter_group_name = aws_db_parameter_group.mariadb_parameter.name
+    parameter_group_name = aws_db_parameter_group.mariadb-parameter.name
     db_subnet_group_name = aws_db_subnet_group.mariadb_subnet.name
     multi_az = "false"
     vpc_security_group_ids = [aws_security_group.allow-mariadb.id]
