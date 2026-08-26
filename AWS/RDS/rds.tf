@@ -12,7 +12,7 @@ resource "aws_db_parameter_group" "mariadb-parameter" {
     description = "MariaDB Parameter group"
 
     parameter {
-      name = "max_allow_packet"
+      name = "max_allowed_packet"
       value = "16777218"
     }
 }
