@@ -31,7 +31,7 @@ resource "aws_db_instance" "gibs_mariadb" {
     multi_az = false
     vpc_security_group_ids = [aws_security_group.allow-mariadb.id]
     storage_type = "gp3"
-    backup_retention_period = 30
+    backup_retention_period = 0
     availability_zone = aws_subnet.gibs_private_subnet_1.availability_zone
     skip_final_snapshot  = true
 
