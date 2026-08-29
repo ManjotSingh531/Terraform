@@ -60,7 +60,7 @@ resource "aws_cloudwatch_metric_alarm" "gibs-cpu-alarm" {
     alarm_actions = [aws_autoscaling_policy.gibs-cpu-policy.arn]
 }
 
-#Auto Descaling Configuration Plicy - Scale Alarm
+#Auto Descaling Configuration Plicy - Descale Alarm
 resource "aws_autoscaling_policy" "gibs-cpu-policy-scaledown" {
     name = "gibs-cpu-policy-scaledown"
     autoscaling_group_name = aws_autoscaling_group.gibs-autoscaling.name
