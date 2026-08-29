@@ -7,8 +7,8 @@ resource "aws_launch_configuration" "gibs-launchconfig" {
 }
 
 #Generate Key
-resource "aws_key_pair" "gibs_key" {
-    key_name = "gibs_key"
+resource "aws_key_pair" "gibs-key" {
+    key_name = "gibs-key"
     public_key = file(var.PATH_TO_PUBLIC_KEY)
 }
 
