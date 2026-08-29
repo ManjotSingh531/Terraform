@@ -1,9 +1,9 @@
 #Auto Scaling Launch Configuration
-resource "aws_launch_configuration" "gibs-launchconfig" {
-    name_prefix = "gibs-launchconfig"
+resource "aws_launch_configuration" "gibs_launchconfig" {
+    name_prefix = "gibs_launchconfig"
     image_id = lookup(var.AMI, var.AWS_REGION)
     instance_type = "t3.micro"
-    key_name = aws_key_pair.gibs_key.key_name
+    key_name = aws_key_pair.gibs-key.key_name
 }
 
 #Generate Key
@@ -16,7 +16,7 @@ resource "aws_key_pair" "gibs-key" {
 resource "aws_autoscaling_group" "gibs-autoscaling" {
     name = "gibs-autoscaling"
     vpc_zone_identifier = ["ap-south-1b", "ap-south-1a"]
-    launch_configuration = aws_launch_configuration.gibs-launchconfig.name
+    launch_configuration = aws_launch_configuration.gibs_launchconfig.name
     min_size = 1
     max_size = 2
     health_check_grace_period = 200
