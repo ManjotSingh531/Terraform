@@ -44,7 +44,7 @@ resource "aws_autoscaling_policy" "gibs-cpu-policy" {
 resource "aws_cloudwatch_metric_alarm" "gibs-cpu-alarm" {
     alarm_name = "gibs-cpu-alarm"
     alarm_description = "Alarm Once CPU User Increase"
-    comparison_operator = "GreaterThanOrEqualToThreshhold"
+    comparison_operator = "GreaterThanOrEqualToThreshold"
     evaluation_periods = "2"
     metric_name = "CPUUtilization"
     namespace = "AWSEC2"
@@ -74,7 +74,7 @@ resource "aws_autoscaling_policy" "gibs-cpu-policy-scaledown" {
 resource "aws_cloudwatch_metric_alarm" "gibs-cpu-alarm-scaledown" {
     alarm_name = "gibs-cpu-alarm-scaledown"
     alarm_description = "Alarm Once CPU User decrease"
-    comparison_operator = "LessThanOrEqualToThreshhold"
+    comparison_operator = "LessThanOrEqualToThreshold"
     evaluation_periods = "2"
     metric_name = "CPUUtilization"
     namespace = "AWSEC2"
