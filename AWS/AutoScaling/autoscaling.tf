@@ -37,7 +37,7 @@ resource "aws_autoscaling_policy" "gibs-cpu-policy" {
     adjustment_type = "ChangeInCapacity"
     scaling_adjustment = "1"
     cooldown = "200"
-    policy_type = "SingleScaling"
+    policy_type = "SimpleScaling"
 }
 
 #Auto Scaling Claud-Watch Monitoring
@@ -67,7 +67,7 @@ resource "aws_autoscaling_policy" "gibs-cpu-policy-scaledown" {
     adjustment_type = "ChangeInCapacity"
     scaling_adjustment = "-1"
     cooldown = "200"
-    policy_type = "SingleScaling"
+    policy_type = "SimpleScaling"
 }
 
 #Auto Descaling Claud-Watch Monitoring
