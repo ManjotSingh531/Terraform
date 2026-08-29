@@ -1,7 +1,11 @@
 resource "aws_s3_bucket" "gibs-bucket" {
     bucket = "gibs-bucket"
-    acl = "private"
     tags = {
       Name = "gibs-bucket"
     }
+}
+
+resource "aws_s3_bucket_acl" "gibs-bucket_acl" {
+    bucket = aws_s3_bucket.gibs-bucket.id
+    acl    = "private"
 }
