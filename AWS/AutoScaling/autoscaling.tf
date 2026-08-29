@@ -16,7 +16,10 @@ resource "aws_key_pair" "gibs-key" {
 resource "aws_autoscaling_group" "gibs-autoscaling" {
     name = "gibs-autoscaling"
     vpc_zone_identifier = ["ap-south-1b", "ap-south-1a"]
-    launch_configuration = aws_launch_template.gibs-launch-template.name
+    launch_template {
+        id = aws_launch_template.gibs-launch-template.id
+        version = "$Latest"
+    }
     min_size = 1
     max_size = 2
     health_check_grace_period = 200
