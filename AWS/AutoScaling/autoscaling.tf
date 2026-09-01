@@ -15,7 +15,7 @@ resource "aws_key_pair" "gibs-key" {
 #Auto Scaling Subnet
 data "aws_subnets" "available" {
     filter {
-        name = "vpc-id"
+        name = "availability-zone"
         values = ["ap-south-1b", "ap-south-1a"]
     }
 }
