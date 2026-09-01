@@ -12,10 +12,18 @@ resource "aws_key_pair" "gibs-key" {
     public_key = file(var.PATH_TO_PUBLIC_KEY)
 }
 
+#Auto Scaling Subnet
+data "aws_subnets" "available" {
+    filter {
+        name = "vpc-id"
+        values = ["ap-south-1b", "ap-south-1a"]
+    }
+}
+
 #Auto Scaling Group
 resource "aws_autoscaling_group" "gibs-autoscaling" {
     name = "gibs-autoscaling"
-    vpc_zone_identifier = ["ap-south-1c", "ap-south-1a"]
+    vpc_zone_identifier = data.aws_subnets.available.ids
     launch_template {
         id = aws_launch_template.gibs-launch-template.id
         version = "$Latest"
@@ -38,8 +46,8 @@ resource "aws_autoscaling_policy" "gibs-cpu-policy" {
     name = "gibs-cpu-policy"
     autoscaling_group_name = aws_autoscaling_group.gibs-autoscaling.name
     adjustment_type = "ChangeInCapacity"
-    scaling_adjustment = "1"
-    cooldown = "200"
+    scaling_adjustment = 1
+    cooldown = 200
     policy_type = "SimpleScaling"
 }
 
@@ -48,12 +56,12 @@ resource "aws_cloudwatch_metric_alarm" "gibs-cpu-alarm" {
     alarm_name = "gibs-cpu-alarm"
     alarm_description = "Alarm Once CPU User Increase"
     comparison_operator = "GreaterThanOrEqualToThreshold"
-    evaluation_periods = "2"
+    evaluation_periods = 2
     metric_name = "CPUUtilization"
-    namespace = "AWSEC2"
-    period = "120"
+    namespace = "AWS/EC2"
+    period = 120
     statistic = "Average"
-    threshold = "30"
+    threshold = 30
 
     dimensions = {
         "AutoScalingGroupName" = aws_autoscaling_group.gibs-autoscaling.name
@@ -68,8 +76,8 @@ resource "aws_autoscaling_policy" "gibs-cpu-policy-scaledown" {
     name = "gibs-cpu-policy-scaledown"
     autoscaling_group_name = aws_autoscaling_group.gibs-autoscaling.name
     adjustment_type = "ChangeInCapacity"
-    scaling_adjustment = "-1"
-    cooldown = "200"
+    scaling_adjustment = -1
+    cooldown = 200
     policy_type = "SimpleScaling"
 }
 
@@ -78,12 +86,12 @@ resource "aws_cloudwatch_metric_alarm" "gibs-cpu-alarm-scaledown" {
     alarm_name = "gibs-cpu-alarm-scaledown"
     alarm_description = "Alarm Once CPU User decrease"
     comparison_operator = "LessThanOrEqualToThreshold"
-    evaluation_periods = "2"
+    evaluation_periods = 2
     metric_name = "CPUUtilization"
-    namespace = "AWSEC2"
-    period = "120"
+    namespace = "AWS/EC2"
+    period = 120
     statistic = "Average"
-    threshold = "10"
+    threshold = 10
 
     dimensions = {
         "AutoScalingGroupName" = aws_autoscaling_group.gibs-autoscaling.name
