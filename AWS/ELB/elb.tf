@@ -76,7 +76,7 @@ resource "aws_security_group" "gibs-ec2-sg" {
         from_port = 80
         to_port = 80
         protocol = "tcp"
-        cidr_blocks = [aws_security_group.gibs-elb-sg.id]
+        security_groups = [aws_security_group.gibs-elb-sg.id]
     }
 
     tags = {
