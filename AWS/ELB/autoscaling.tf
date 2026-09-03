@@ -5,7 +5,7 @@ resource "aws_launch_template" "gibs-launch-template" {
     instance_type = "t3.micro"
     key_name = aws_key_pair.gibs-key.key_name
     security_group_names = [aws_security_group.gibs-ec2-sg.name]
-    user_data = file(nginx.sh)
+    user_data = file("nginx.sh")
 
     lifecycle {
         create_before_destroy = true
