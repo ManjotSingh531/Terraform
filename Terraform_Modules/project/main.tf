@@ -4,5 +4,5 @@ module "web_server" {
     name = "gibs-ec2-instance"
     ami = "ami-01a00762f46d584a1"
     instance_type = "t3.micro"
-    security_group_ids = [aws_security_group.gibs-ec2-sg.id]
+    security_group_ids = ["sg-0b2f243cf09cc5d2f"]
 }
