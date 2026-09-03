@@ -18,31 +18,24 @@ resource "aws_key_pair" "gibs-key" {
     public_key = file(var.PATH_TO_PUBLIC_KEY)
 }
 
-#Auto Scaling Subnet
-data "aws_subnets" "available" {
-    filter {
-        name = "availability-zone"
-        values = ["ap-south-1b", "ap-south-1a"]
-    }
-}
-
 #Auto Scaling Group
 resource "aws_autoscaling_group" "gibs-autoscaling" {
     name = "gibs-autoscaling"
-    vpc_zone_identifier = data.aws_subnets.available.ids
+    vpc_zone_identifier = [aws_subnet.gibs_public_subnet_1.id, aws_subnet.gibs_public_subnet_2.id]
     launch_template {
         id = aws_launch_template.gibs-launch-template.id
         version = "$Latest"
     }
-    min_size = 1
+    min_size = 2
     max_size = 2
     health_check_grace_period = 200
-    health_check_type = "EC2"
+    health_check_type = "ELB"
+    load_balancers = [aws_elb.gibs-elb.name]
     force_delete = true
 
     tag {
         key = "Name"
-        value = "gibs custom ec2 instance"
+        value = "gibs custom ec2 instance via LB"
         propagate_at_launch = true
     }
 }

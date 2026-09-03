@@ -33,7 +33,7 @@ resource "aws_security_group" "gibs-elb-sg" {
     description = "Security group for ELB"
     vpc_id = aws_vpc.gibs-vpc.id
 
-    egress = {
+    egress {
         from_port = 0
         to_port = 0
         protocol = "-1"
@@ -58,7 +58,7 @@ resource "aws_security_group" "gibs-ec2-sg" {
     description = "Security group for EC2 instances"
     vpc_id = aws_vpc.gibs-vpc.id
 
-    egress = {
+    egress {
         from_port = 0
         to_port = 0
         protocol = "-1"
