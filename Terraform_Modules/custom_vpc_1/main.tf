@@ -18,8 +18,8 @@ resource "aws_key_pair" "gibs-key" {
 resource "aws_instance" "gibs_instance" {
     ami = var.instance_ami
     instance_type = var.instance_type
-    subnet_id = module.network.subnet_id
-    vpc_security_group_ids = ["${module.network.sg_id}"]
+    subnet_id = module.myvpc.subnet_id
+    vpc_security_group_ids = ["${module.myvpc.sg_id}"]
     key_name = aws_key_pair.gibs-key.key_name
 
     tags = {
